@@ -67,7 +67,7 @@
             }
           },
           "options": {
-            "port": 5000,
+            "port": 8080,
             "ssl": false,
             "sslKey": "src/app/secrets/ssl.key",
             "sslCert": "src/app/secrets/ssl.crt"
