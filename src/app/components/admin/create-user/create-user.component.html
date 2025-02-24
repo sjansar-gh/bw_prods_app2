@@ -1,0 +1,40 @@
+<div class="w-full gap-y-0 mt-5" style="margin-left: 50px; width: 30%">
+    <div class="w-full">
+        <p class="text-lg font-medium">Create New User</p>
+    </div>
+    <form [formGroup]="userForm" class="flex-col" (ngSubmit)="onSubmit()">
+        <div class="grid grid-cols-1 gap-y-0 bg-white px-1 py-0">
+            <mat-form-field appearance="outline">
+                <mat-label>email</mat-label>
+                <input formControlName="email" matInput id="email" required="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>first_name</mat-label>
+                <input formControlName="first_name" matInput id="first_name" required="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>last_name</mat-label>
+                <input formControlName="last_name" matInput id="last_name" required="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>password</mat-label>
+                <input [type]="hide_password ? 'password' : 'text'" formControlName="password" matInput id="password" required="true">
+                <mat-icon matSuffix (click)="hide_password = !hide_password">{{hide_password ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>confirm_password</mat-label>
+                <input [type]="hide_password ? 'password' : 'text'" formControlName="confirm_password" matInput id="confirm_password" required="true">
+                <mat-icon matSuffix (click)="hide_confirm_password = !hide_confirm_password">{{hide_confirm_password ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>                
+            <mat-checkbox formControlName="admin" id="admin" color="primary">
+                <span *ngIf="userForm.value['admin']">Admin (Yes)</span>
+                <span *ngIf="!userForm.value['admin']">Admin (No)</span>
+            </mat-checkbox>
+        </div>
+        <div class="grid grid-cols-1 px-4 py-0 content-center justify-items-end">
+            <button mat-raised-button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit" [disabled]="!userForm.valid">
+                Create User
+            </button>
+        </div>
+    </form>
+</div>

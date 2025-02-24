@@ -1,1 +1,1 @@
-BW products app2
+BW products angular app

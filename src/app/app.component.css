@@ -1,0 +1,16 @@
+.bw-spacer {
+    flex: 1 1 auto;
+  }
+
+.menu{
+    position:absolute;
+    z-index:1;
+    background:whitesmoke;
+    display: none;
+  }
+
+.menu a{
+  width: 100%;
+  min-width:8rem;
+}
+  

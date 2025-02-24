@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <span class="justify-start">
+    <a href="https://brass-works.co.uk/" title="" aria-label="store logo">
+      <img src="https://brass-works.co.uk/media/logo/stores/1/brasswork_logo.png" title="" alt="" width="70%"
+        height="70%">
+    </a>
+  </span>
+  <span class="bw-spacer"></span>
+  <button mat-icon-button>
+    <a routerLink="/home">
+      <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>
+    </a>
+  </button>
+  <span *ngIf="!isAuth">
+    <button mat-icon-button>
+      <a routerLink="/login">
+        <mat-icon aria-hidden="false" aria-label="login icon" fontIcon="login" [ariaSetSize]="50"
+          color="white"></mat-icon>
+      </a>
+    </button>
+  </span>
+  <span *ngIf="isAuth">
+    <button class='header-list' mat-icon-button [matMenuTriggerFor]="loginMenu">
+      <mat-icon aria-hidden="false" aria-label="user icon" fontIcon="account_circle" [ariaSetSize]="50"
+            color="white" matTooltip={{user.name}}></mat-icon>
+    </button>
+    <mat-menu #loginMenu="matMenu">
+      <button mat-menu-item>
+        <a routerLink="/profile">Profile</a>
+      </button>
+      <button *ngIf="user.admin" mat-menu-item>
+        <a routerLink="/admin">Admin</a>
+      </button>
+      <button mat-icon-button>
+        <a (click)="logout()">
+          <mat-icon aria-hidden="false" aria-label="logout icon" fontIcon="logout" [ariaSetSize]="50"
+            color="white"></mat-icon>
+        </a>
+      </button>
+    </mat-menu>
+  </span>
+</mat-toolbar>
+<div class="p-4" 
+  (mousemove)="onUserAction()"
+  (click)="onUserAction()"
+  (keypress)="onUserAction()"
+  >
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,149 @@
+<div class="flex flex-col py-4" style="margin-left: 50px; width: 90%">
+    <div class="w-full">
+        <h2 class="text-xl font-semibold">Product</h2>
+    </div>
+    <div *ngIf="product" class="w-full">
+        <div class="flex justify-between">
+            <span>
+                <app-sku-auto [sharedValue]="sharedValue"></app-sku-auto>
+            </span>
+            <span class="space-x-4">
+                <!-- <button mat-raised-button (click)="newProduct()" class="bg-blue-500 text-white px-4 py-2 rounded">
+                    New
+                </button> -->
+                <button mat-raised-button (click)="editProduct()" class="bg-blue-500 text-white px-4 py-2 rounded">
+                    Edit
+                </button>
+                <button mat-raised-button (click)="productList()" class="bg-blue-500 text-white px-4 py-2 rounded">
+                    List
+                </button>
+            </span>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>sku</th>
+                    <td>{{ product.sku }}</td>
+                </tr>
+                <tr>
+                    <th>attribute_set_code</th>
+                    <td>{{ product.attribute_set_code }}</td>
+                </tr>
+                <tr>
+                    <th>categories</th>
+                    <td>{{ product.categories }}</td>
+                </tr>
+                <tr>
+                    <th>name</th>
+                    <td>{{ product.name }}</td>
+                </tr>
+                <tr>
+                    <th>description</th>
+                    <td>{{ product.description }}</td>
+                </tr>
+                <tr>
+                    <th>weight</th>
+                    <td>{{ product.weight }}</td>
+                </tr>
+                <tr>
+                    <th>price</th>
+                    <td>{{ product.price }}</td>
+                </tr>
+                <tr>
+                    <th>meta_title</th>
+                    <td>{{ product.meta_title }}</td>
+                </tr>
+                <tr>
+                    <th>meta_description</th>
+                    <td>{{ product.meta_description }}</td>
+                </tr>
+                <tr>
+                    <th>gtin</th>
+                    <td>{{ product.gtin }}</td>
+                </tr>
+                <tr>
+                    <th>brand</th>
+                    <td>{{ product.brand }}</td>
+                </tr>
+                <tr>
+                    <th>product_brand</th>
+                    <td>{{ product.product_brand }}</td>
+                </tr>
+                <tr>
+                    <th>delivery_information</th>
+                    <td>{{ product.delivery_information }}</td>
+                </tr>
+                <tr>
+                    <th>exclude_from_google_feed</th>
+                    <td>{{ product.exclude_from_google_feed }}</td>
+                </tr>
+
+                <tr>
+                    <th>finish</th>
+                    <td>{{ product.finish }}</td>
+                </tr>
+                <tr>
+                    <th>google_custom_label_0</th>
+                    <td>{{ product.google_custom_label_0 }}</td>
+                </tr>
+                <tr>
+                    <th>google_custom_label_1</th>
+                    <td>{{ product.google_custom_label_1 }}</td>
+                </tr>
+                <tr>
+                    <th>google_title</th>
+                    <td>{{ product.google_title }}</td>
+                </tr>
+                <tr>
+                    <th>google_product_category</th>
+                    <td>{{ product.google_product_category }}</td>
+                </tr>
+                <tr>
+                    <th>product_type_0</th>
+                    <td>{{ product.product_type_0 }}</td>
+                </tr>
+                <tr>
+                    <th>product_type_1</th>
+                    <td>{{ product.product_type_1 }}</td>
+                </tr>
+
+                <tr>
+                    <th>size</th>
+                    <td>{{ product.size }}</td>
+                </tr>
+                <tr>
+                    <th>backset_size</th>
+                    <td>{{ product.backset_size }}</td>
+                </tr>
+                <tr>
+                    <th>product_type_1</th>
+                    <td>{{ product.fixing_centre }}</td>
+                </tr>
+                <tr>
+                    <th>style</th>
+                    <td>{{ product.style }}</td>
+                </tr>
+                <tr>
+                    <th>unit</th>
+                    <td>{{ product.unit }}</td>
+                </tr>
+                <tr>
+                    <th>related_skus</th>
+                    <td>{{ product.related_skus }}</td>
+                </tr>
+                <tr>
+                    <th>upsell_skus</th>
+                    <td>{{ product.upsell_skus }}</td>
+                </tr>
+                <tr>
+                    <th>upsell_position</th>
+                    <td>{{ product.upsell_position }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div
+    (mousemove)="onUserAction()"
+    (click)="onUserAction()"
+    (keypress)="onUserAction()"></div>

@@ -1,0 +1,21 @@
+<div class="flex flex-col py-4 mt-5" style="margin-left: 50px; width: 90%">
+    <div class="w-full">
+        <p class="text-lg font-medium">Profile | View</p>
+    </div>
+    <div *ngIf="user" class="w-full">
+        <div>
+            <table>
+                <tr>
+                    <th>email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>name</th>
+                    <td>{{ user.name }}</td>
+                </tr>
+                <tr>
+                    <th>admin</th>
+                    <td>{{ user.admin? 'Yes': 'No' }}</td>
+                </tr>
+            </table>
+    </div>

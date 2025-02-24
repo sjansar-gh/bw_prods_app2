@@ -1,0 +1,177 @@
+<div class="flex flex-col mt-10" style="margin-left: 50px; width: 90%">
+    <div class="w-full">
+        <h2 class="text-xl font-semibold">Product | Edit</h2>
+    </div>
+    <div class="w-full gap-y-0">
+        <form [formGroup]="productForm" class="flex-col" (ngSubmit)="onSubmit()">
+            <div class="grid grid-cols-2 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>sku</mat-label>
+                    <input formControlName="sku" matInput id="sku" required="true">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>attribute_set_code</mat-label>
+                    <input formControlName="attribute_set_code" matInput id="attribute_set_code" required="true">
+                    <!-- <mat-hint>attribute_set_code is required</mat-hint> -->
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-1 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>categories</mat-label>
+                    <input formControlName="categories" matInput id="categories" required="true">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-1 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>name</mat-label>
+                    <input formControlName="name" matInput id="name" required="true">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-1 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>description</mat-label>
+                    <textarea rows="4" formControlName="description" matInput id="description"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-2 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>weight</mat-label>
+                    <input formControlName="weight" matInput id="weight">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>price</mat-label>
+                    <input formControlName="price" matInput id="price" required="true">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-2 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>meta_title</mat-label>
+                    <input formControlName="meta_title" matInput id="meta_title">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>meta_description</mat-label>
+                    <input formControlName="meta_description" matInput id="meta_description">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-3 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>gtin</mat-label>
+                    <input formControlName="gtin" matInput id="gtin" required="true">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>brand</mat-label>
+                    <input formControlName="brand" matInput id="brand">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>product_brand</mat-label>
+                    <input formControlName="product_brand" matInput id="product_brand">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-3 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>delivery_information</mat-label>
+                    <input formControlName="delivery_information" matInput id="delivery_information">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>exclude_from_google_feed</mat-label>
+                    <input formControlName="exclude_from_google_feed" matInput id="exclude_from_google_feed">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>finish</mat-label>
+                    <input formControlName="finish" matInput id="finish">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-3 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>google_custom_label_0</mat-label>
+                    <input formControlName="google_custom_label_0" matInput id="google_custom_label_0">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>google_custom_label_1</mat-label>
+                    <input formControlName="google_custom_label_1" matInput id="google_custom_label_1">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>google_title</mat-label>
+                    <input formControlName="google_title" matInput id="google_title">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-3 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>google_custom_label_0</mat-label>
+                    <input formControlName="google_custom_label_0" matInput id="google_custom_label_0">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>google_custom_label_1</mat-label>
+                    <input formControlName="google_custom_label_1" matInput id="google_custom_label_1">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>google_title</mat-label>
+                    <input formControlName="google_title" matInput id="google_title">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-3 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>google_product_category</mat-label>
+                    <input formControlName="google_product_category" matInput id="google_product_category">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>product_type_0</mat-label>
+                    <input formControlName="product_type_0" matInput id="product_type_0">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>product_type_1</mat-label>
+                    <input formControlName="product_type_1" matInput id="product_type_1">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-3 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>size</mat-label>
+                    <input formControlName="size" matInput id="size">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>backset_size</mat-label>
+                    <input formControlName="backset_size" matInput id="backset_size">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>fixing_centre</mat-label>
+                    <input formControlName="fixing_centre" matInput id="fixing_centre">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-3 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>style</mat-label>
+                    <input formControlName="style" matInput id="style">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>unit</mat-label>
+                    <input formControlName="unit" matInput id="unit">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>related_skus</mat-label>
+                    <input formControlName="related_skus" matInput id="related_skus">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-3 gap-1 bg-white px-4 py-0">
+                <mat-form-field appearance="outline">
+                    <mat-label>related_position</mat-label>
+                    <input formControlName="related_position" matInput id="related_position">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>upsell_skus</mat-label>
+                    <input formControlName="upsell_skus" matInput id="upsell_skus">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>upsell_position</mat-label>
+                    <input formControlName="upsell_position" matInput id="upsell_position">
+                </mat-form-field>
+            </div>
+            <div class="grid grid-cols-1 px-4 py-0 content-center justify-items-end">
+                <button mat-raised-button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit" [disabled]="!productForm.valid">
+                    Update
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

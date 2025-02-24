@@ -1,0 +1,48 @@
+<div class="flex flex-col py-4" style="margin-left: 50px; width: 90%">
+    <div class="w-full">
+        <h2 class="text-xl font-semibold">Product | List</h2>
+    </div>
+    <div class="w-full">
+        <div class="flex justify-between">
+            <span>
+                <!-- (selectionChange)="educationLevelChangeAction(education_level)" [(ngModel)]="education_level" > -->
+                <mat-form-field appearance="outline">
+                    <mat-label>categories</mat-label>
+                    <mat-select placeholder="Select categories" name="category_list" [(value)]="selectedCategory" (selectionChange)="getProductByCategory($event)">
+                        @for (category of categories; track category; let i = $index) {
+                            <mat-option [value]="category" >{{i+1}} - {{ category }}</mat-option>
+                        }
+                    </mat-select>
+                  </mat-form-field>
+            </span>
+            <span class="space-x-4">
+            </span>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>sku</th>
+                    <th>attribute_set_code</th>
+                    <th>categories</th>
+                    <th>name</th>
+                    <th>gtin</th>
+                    <th></th>
+                </tr>
+                <!-- <span *ngIf="productsByCategory"> -->
+                    @for (prod of productsByCategory; track prod) {
+                    <tr>
+                        <td>{{prod.sku}}</td>
+                        <td>{{prod.attribute_set_code}}</td>
+                        <td>{{prod.categories}}</td>
+                        <td>{{prod.name}}</td>
+                        <td>{{prod.gtin}}</td>
+                        <td><button mat-raised-button (click)="editProduct(prod.sku)" class="bg-blue-500 text-white px-4 py-2 rounded">Select</button></td>
+                    </tr>
+                    }
+                <!-- </span> -->
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- <p>Selected categories: {{ selectedCategory }}</p> -->

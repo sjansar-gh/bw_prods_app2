@@ -1,0 +1,79 @@
+<div class="w-full gap-y-0 mt-5" style="margin-left: 50px; width: 40%">
+    <div class="w-full">
+        <p class="text-lg font-medium">Profile | Edit</p>
+    </div>
+    <form [formGroup]="userForm" class="flex-col" (ngSubmit)="onSubmit()">
+        <div class="grid grid-cols-1 gap-1 bg-white px-4 py-0">
+            <mat-form-field appearance="outline">
+                <mat-label>email</mat-label>
+                <input formControlName="email" matInput id="email" readonly="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>first_name</mat-label>
+                <input formControlName="first_name" matInput id="first_name" required="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>last_name</mat-label>
+                <input formControlName="last_name" matInput id="last_name" required="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>password</mat-label>
+                <input [type]="hide_password ? 'password' : 'text'" formControlName="password" matInput id="password" required="true" placeholder="Enter new password" class="is-valid">
+                <mat-icon matSuffix (click)="hide_password = !hide_password">{{hide_password ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>new password</mat-label>
+                <input [type]="hide_new_password ? 'password' : 'text'" formControlName="new_password" matInput id="new_password" required="true" placeholder="Enter new password" class="is-valid">
+                <mat-icon matSuffix (click)="hide_new_password = !hide_new_password">{{hide_new_password ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-icon *ngIf="userForm.get('new_password')?.valid" matIconSuffix color="green" fontIcon="done"></mat-icon>
+            </mat-form-field>
+            <mat-error *ngIf="userForm.get('new_password')?.hasError('hasNumbers')">
+                Password must have numbers
+            </mat-error>
+            <mat-error *ngIf="userForm.get('new_password')?.hasError('hasUppercase')">
+                Password must have upper case characters
+            </mat-error>
+            <mat-error *ngIf="userForm.get('new_password')?.hasError('hasLowercase')">
+                Password must have lower case characters
+            </mat-error>
+            <mat-error *ngIf="userForm.get('new_password')?.hasError('minlength')">
+                Password length must be at least 8 characters
+            </mat-error>
+
+            <!-- confirm_password-->
+            <mat-form-field appearance="outline">
+                <mat-label>confirm_password</mat-label>
+                <input [type]="hide_confirm_password ? 'password' : 'text'" formControlName="confirm_password" matInput id="confirm_password" required="true" placeholder="Confirm password" class="is-valid">
+                <mat-icon matSuffix (click)="hide_confirm_password = !hide_confirm_password">{{hide_confirm_password ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-icon *ngIf="userForm.get('confirm_password')?.valid && !userForm?.hasError('passwordMismatch')" matIconSuffix color="green" fontIcon="done"></mat-icon>
+            </mat-form-field>
+            <mat-error *ngIf="userForm.get('confirm_password')?.hasError('hasNumbers')">
+                confirm_password must have numbers
+            </mat-error>
+            <mat-error *ngIf="userForm.get('confirm_password')?.hasError('hasUppercase')">
+                confirm_password must have upper case characters
+            </mat-error>
+            <mat-error *ngIf="userForm.get('confirm_password')?.hasError('hasLowercase')">
+                confirm_password must have lower case characters
+            </mat-error>
+            <mat-error *ngIf="userForm.get('confirm_password')?.hasError('minlength')">
+                confirm_password length must be at least 8 characters
+            </mat-error>
+            <mat-error *ngIf="userForm?.hasError('passwordMismatch') && userForm.get('confirm_password')?.touched">
+                Passwords do not match
+            </mat-error>
+            <!-- -->
+                           
+            <!-- <mat-checkbox formControlName="admin" id="admin" color="primary" aria-readonly="true"> -->
+            <span *ngIf="userForm.value['admin']">Admin (Yes)</span>
+            <span *ngIf="!userForm.value['admin']">Admin (No)</span>
+            <!-- </mat-checkbox> -->
+        </div>
+        <div class="grid grid-cols-1 px-4 py-0 content-center justify-items-end">
+            <button mat-raised-button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit" [disabled]="!userForm.valid">
+                Update Profile
+            </button>
+        </div>
+    </form>
+</div>
+
