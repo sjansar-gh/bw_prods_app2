@@ -10,10 +10,6 @@ import { AdminComponent } from './components/admin/admin-parent/admin.component'
 import { ProfileParentComponent } from './components/profile/profile-parent/profile-parent.component';
 
 export const routes: Routes = [
-    // {
-    //     path:"",
-    //     component: ProductsComponent
-    // },
     {
         path: '',
         redirectTo: 'login',
@@ -57,5 +53,10 @@ export const routes: Routes = [
         path: "admin",
         component: AdminComponent,
         canActivate: [authGuard]
-    }
+    },
+    {
+        path: '**',
+        redirectTo: 'login',
+        pathMatch: 'full'
+    },
 ];

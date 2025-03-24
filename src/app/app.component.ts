@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,6 +23,7 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy{
   user!: any;
   idleService = inject(IdleService);
+  router = inject(Router)
   private idleSubscription?: Subscription; 
 
   constructor(){
@@ -58,8 +59,8 @@ export class AppComponent implements OnInit, OnDestroy{
   }
 
   logout(){
+    this.router.navigate(['/login']);
     localStorage.removeItem('tw_user');
-    window.location.reload();
   }
 
   checkAppIdleness(){

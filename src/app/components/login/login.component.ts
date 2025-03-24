@@ -63,8 +63,8 @@ export class LoginComponent {
             localStorage.setItem('tw_user', JSON.stringify(result));
             this.router.navigate(['/home']);
           }else{
-            localStorage.removeItem('tw_user');
             this.router.navigate(['/login']);
+            localStorage.removeItem('tw_user');
           }
         }
       },

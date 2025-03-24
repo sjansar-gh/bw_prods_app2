@@ -85,8 +85,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.idleCount +=1;
         if(this.idleCount > 5){
           console.log('Logging out ...');
-          localStorage.removeItem("tw_user");
           this.router.navigate(['/login']);
+          localStorage.removeItem("tw_user");
           this.idleCount = 0;
         }
       }else{
