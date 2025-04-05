@@ -52,7 +52,7 @@ export class ProfileEditComponent {
 
   getUserProfile(){
     const tw_user: any = localStorage.getItem('tw_user');
-    console.log('tw_user = ', tw_user);
+    //console.log('tw_user = ', tw_user);
     if(tw_user){
       let user_logged_in = JSON.parse(tw_user);
       if(user_logged_in && user_logged_in.email){

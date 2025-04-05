@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   skus: string[] = [];
 
   //signal
-  sharedValue = signal('FF611EP');
+  sharedSku = signal('FF611EP');
   //
 
   //Idleness logic
@@ -31,7 +31,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   
   constructor(private activatedRoute: ActivatedRoute, private productService: ProductService, private router: Router){
     effect(() => {
-      this.getProduct(this.sharedValue())
+      this.getProduct(this.sharedSku())
     });
   }
 
@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     let skuSelected: string = this.activatedRoute.snapshot.paramMap.get('sku')!;
     if(skuSelected){
       console.log('skuSelected', skuSelected);
-      this.sharedValue.set(skuSelected);
+      this.sharedSku.set(skuSelected);
     }
 
     //Check app idleness
@@ -52,16 +52,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productService.getProducts(skuSelected).subscribe( (result) => {
       // console.log(result);
       this.product=result;
-      console.log(this.product);
+      //console.log(this.product);
     });
   }
 
   getSkUs(skuStr:string){
     this.productService.getSKUs(skuStr).subscribe( (result) => {
-      console.log(result);
+      //console.log(result);
       if(result){
         this.skus=result;
-        console.log(this.skus);
+        console.log('totals skus: ', this.skus.length);
       }
     })
   }

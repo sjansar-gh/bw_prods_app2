@@ -1,15 +1,11 @@
 <mat-form-field class="rounded">
   <!-- class="text-red-400 text-xl" -->
   <mat-label>sku</mat-label>
-  <input type="text" placeholder="Select sku" aria-label="SKU" matInput [formControl]="myControl"
-    [matAutocomplete]="auto" class="bg-white" />
-  <mat-autocomplete class="bg-white" #auto="matAutocomplete" (optionSelected)="show($event.option.value)">
+  <input type="text" placeholder="Select sku" aria-label="SKU" matInput [formControl]="skuInput"
+    [matAutocomplete]="auto" style="text-transform: uppercase;" />
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="show($event.option.value)">
     @for (option of filteredOptions | async; track option) {
     <mat-option [value]="option">{{ option }}</mat-option>
     }
   </mat-autocomplete>
 </mat-form-field>
-<!-- <div>
-    <p>Child value: {{ sharedValue() }}</p>
-    <button (click)="updateValue()" mat-raised-button class="bg-blue-500 text-white px-4 py-2 rounded">Update Value</button>
-  </div> -->

@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy{
   router = inject(Router)
   private idleSubscription?: Subscription; 
 
-  constructor(){
+  constructor(private _elementRef: ElementRef){
 
   }
 
@@ -81,5 +81,12 @@ export class AppComponent implements OnInit, OnDestroy{
     if(this.idleSubscription){
       this.idleSubscription?.unsubscribe();
     }
+  }
+
+  toggleDarkMode(){
+    console.log('toggle clicked');
+    console.log(this._elementRef.nativeElement.ownerDocument.body);
+    this._elementRef.nativeElement.ownerDocument.body.classList.toggle("dark");
+    //this._elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'pink';
   }
 }

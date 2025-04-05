@@ -26,7 +26,7 @@ export class UpdateUsersComponent {
   getAllUsers(){
     this.userService.getUsers().subscribe( (result) => {
       this.users = result;
-      console.log('all_users = ', this.users);
+      //console.log('all_users = ', this.users);
     })
   }
 
@@ -37,12 +37,14 @@ export class UpdateUsersComponent {
   }
 
   deleteUser(user_email: string){
-    this.userService.deleteUser(user_email).subscribe( (resp) => {
-      console.log(resp);
-      this.del_resp = resp;
-      this.displaySnackbar(this.del_resp);
-      this.delayedGetAllUsers();
-    })
+    if (window.confirm(`Do you really want to delete user: ${user_email}?`)){
+      this.userService.deleteUser(user_email).subscribe( (resp) => {
+        console.log(resp);
+        this.del_resp = resp;
+        this.displaySnackbar(this.del_resp);
+        this.delayedGetAllUsers();
+      });
+    }
   }
 
   displaySnackbar(resp: any){

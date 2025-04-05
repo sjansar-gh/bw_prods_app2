@@ -37,7 +37,7 @@ export class ListComponent {
   getCategories(){
     this.prodService.getAllUniqueCategories().subscribe( (catList) => {
       this.categories = catList;
-      console.log(this.categories);
+      this.categories && console.log('total categories: ', this.categories.length);
     })
   }
 
@@ -47,7 +47,8 @@ export class ListComponent {
       this.prodService.getProductsByCategory(this.selectedCategory)
       .subscribe( (products) => {
         this.productsByCategory = products;
-        console.log('Total products = ', this.productsByCategory.length);
+        this.productsByCategory && 
+          console.log('Total products = ', this.productsByCategory.length);
       });
     }
   }

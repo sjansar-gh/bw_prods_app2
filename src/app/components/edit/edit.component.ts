@@ -143,11 +143,11 @@ export class EditComponent {
   }
 
   getProduct(skuSelected:string){
-    console.log('-> getProduct()');
+    //console.log('-> getProduct()');
     this.productService.getProducts(skuSelected).subscribe( (result) => {
-      console.log(result);
+      //console.log(result);
       this.editProduct=result;
-      console.log(this.editProduct);
+      //console.log(this.editProduct);
       this.updateForm();
     });
   }

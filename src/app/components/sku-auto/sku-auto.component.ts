@@ -25,41 +25,43 @@ export class SkuAutoComponent {
   productService = inject(ProductService);
 
   //Signal
-  @Input() sharedValue!: WritableSignal<string>;
+  @Input() sharedSku!: WritableSignal<string>;
   
   updateValue(skuSelected:string) {
-    this.sharedValue.set(skuSelected);
+    this.sharedSku.set(skuSelected);
   }
   //
 
-  myControl = new FormControl('');
-  options: string[] = ["FF611EP","FF612","FF613","FF62","FF71PCB","FF72PCB","FF73PCB","FF74","FF75","FF80L"];
+  skuInput = new FormControl('');
+  //options: string[] = ["FF611EP","FF612","FF613","FF62","FF71PCB","FF72PCB","FF73PCB","FF74","FF75","FF80L"];
   filteredOptions: Observable<string[]> | undefined;
   skus: string[] = [];
 
   ngOnInit() {
     // this.options.push('Twelve', 'Twenty');
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredOptions = this.skuInput.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
   }
 
   private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    this.getSkUs(filterValue);
+    if(value){
+      const filterValue = value.toLowerCase();
+      this.getSkUs(filterValue);
 
-    return this.skus.filter((option) =>
-      option.toLowerCase().includes(filterValue)
-    );
+      return this.skus.filter((option) =>
+        option.toLowerCase().includes(filterValue)
+      );
+    }else return [];
   }
 
   getSkUs(skuStr:string){
     this.productService.getSKUs(skuStr).subscribe( (result) => {
-      console.log(result);
+      //console.log(result);
       if(result){
         this.skus=result;
-        console.log(this.skus);
+        console.log('total skus: ', this.skus.length);
       }
     })
   }

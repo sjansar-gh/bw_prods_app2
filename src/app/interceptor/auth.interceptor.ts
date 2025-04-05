@@ -6,7 +6,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     withCredentials: true,
   });
 
-  console.log('-> authInterceptor');
-
+  //console.log('-> authInterceptor');
   return next(reqWithCreds);
 };

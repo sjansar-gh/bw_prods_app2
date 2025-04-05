@@ -9,18 +9,20 @@
                 <div *ngIf="error_msg" style="color: red">{{error_msg}}</div>
                 <mat-form-field appearance="outline">
                     <mat-label>email</mat-label>
-                    <input formControlName="email" matInput id="email" required="true">
+                    <input formControlName="email" matInput id="email" required="true" autocomplete="email">
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>password</mat-label>
-                    <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput id="password" required="true">
+                    <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput id="password"
+                        required="true" autocomplete="off">
                     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     <!-- <mat-hint>Enter password</mat-hint> -->
                 </mat-form-field>
             </div>
             <div class="grid grid-cols-1 px-4 py-0 content-center justify-items-end">
-                <button mat-raised-button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit" [disabled]="!loginForm.valid">
+                <button mat-raised-button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit"
+                    [disabled]="!loginForm.valid">
                     Login
                 </button>
             </div>

@@ -1,17 +1,111 @@
-<div class="w-full gap-y-0 mt-5" style="margin-left: 50px; width: 30%">
+<div class="w-full mt-5" style="margin-left: 50px; width: 75%">
     <div class="w-1/2">
         <p class="text-lg font-medium">Manage data</p>
     </div>
-    <div class="grid grid-cols-1 bg-white px-4 py-4 mt-10">
-        <input type="file" matTooltip="Select excel file" #fileInput (change)="onFileSelected($event)" class="py-4">
-        <button mat-raised-button matTooltip="Click to upload excel sheet of products" (click)="uploadFile()" class="bg-blue-500 text-white px-4 py-2 rounded">
-            Upload excel sheet
-        </button>
-        <mat-progress-bar *ngIf="uploadProgress" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
-    </div>
-    <div class="grid bg-white px-4 py-10">
-        <button mat-raised-button matTooltip="Click to download excel sheet of products" (click)="downloadData()" class="bg-blue-500 text-white px-4 py-2 rounded">
-            Download excel sheet
-        </button>
+
+    <div class="flex flex-row md:flex-row space-x-2">
+        <!-- Download -->
+        <div class="down_form">
+            <h2 class="text-center">Download excel</h2>
+            <div class="grid bg-white px-4 py-10">
+                <button [disabled]="showSpinner()" mat-raised-button matTooltip="Download excel sheet of products"
+                    (click)="downloadData()" id="dwn_btn" class="bg-blue-500 text-white py-2 mb-3 rounded">
+                    Download excel sheet
+                </button>
+                <mat-spinner style="margin:0 auto;" [diameter]="30" *ngIf="show_d_spinner"
+                    mode="indeterminate"></mat-spinner>
+                <mat-progress-bar *ngIf="show_d_spinner" mode="determinate" [value]="_d_value">
+                </mat-progress-bar>
+                <span style="margin:0 auto;" *ngIf="show_d_spinner">Excel downloaded: {{_d_value}}%</span>
+            </div>
+        </div>
+
+        <!-- Upload -->
+        <div class="up_form">
+            <h2 class="text-center">Upload excel</h2>
+            <!-- Tick bar -->
+            <div class="tick-bar">
+                <div class="tick-line"></div>
+                <div class="tick-step"></div>
+                <div class="tick-step"></div>
+                <div class="tick-step"></div>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="progressbar">
+                <div class="progress" id="progress"></div>
+                <div class="progress-step progress-step-active" data-title="Upload"></div>
+                <div class="progress-step" data-title="Convert"></div>
+                <div class="progress-step" data-title="Insert"></div>
+            </div>
+
+            <div class="form-step form-step-active">
+                <div class="grid grid-cols-1 bg-white px-4 py-4 mt-10">
+                    <input [disabled]="showSpinner()" type="file" matTooltip="Select excel file" id="file_in"
+                        (change)="onFileSelected($event)" class="py-4">
+
+                    <div class="btns-group">
+                        <button [disabled]="u_action_btns[0]" mat-raised-button
+                            matTooltip="Upload excel sheet of products" (click)="uploadFile()" id="up_btn"
+                            class="bg-blue-500 text-white text-sm px-4 py-2 mb-3 rounded">
+                            Upload excel sheet
+                        </button>
+                        <button [disabled]="disable_btns[0]" mat-raised-button matTooltip="Next step" (click)="next()"
+                            id="nxt_btn_u" class="bg-blue-500 text-white text-sm px-4 py-2 mb-3 rounded">
+                            Next
+                        </button>
+                    </div>
+                    <mat-spinner style="margin:0 auto;" [diameter]="30" *ngIf="show_u_spinner"
+                        mode="indeterminate"></mat-spinner>
+                    <mat-progress-bar *ngIf="show_u_spinner" mode="determinate" [value]="_u_value"></mat-progress-bar>
+                    <span style="margin:0 auto;" *ngIf="show_u_spinner">Excel uploaded: {{_u_value}}%</span>
+                </div>
+            </div>
+            <div class="form-step">
+                <div class="grid grid-cols-1 bg-white px-4 py-4 mt-10">
+                    <div class="btns-group">
+                        <button [disabled]="u_action_btns[1]" mat-raised-button matTooltip="Convert to json"
+                            (click)="convertExcelToJson()" id="json_btn"
+                            class="bg-blue-500 text-white text-sm px-4 py-2 mb-3 rounded">
+                            Convert to JSON
+                        </button>
+                        <button [disabled]="disable_btns[1]" mat-raised-button matTooltip="Next step" (click)="next()"
+                            id="nxt_btn_c" class="bg-blue-500 text-white text-sm px-4 py-2 mb-3 rounded">
+                            Next
+                        </button>
+                    </div>
+                    <mat-spinner style="margin:0 auto;" [diameter]="30" *ngIf="show_u_spinner"
+                        mode="indeterminate"></mat-spinner>
+                    <mat-progress-bar *ngIf="show_u_spinner" mode="determinate" [value]="_u_value"></mat-progress-bar>
+                    <span style="margin:0 auto;" *ngIf="show_u_spinner">Converted: {{_u_value}}%</span>
+                </div>
+            </div>
+            <div class="form-step">
+                <div class="grid grid-cols-1 bg-white px-4 py-4 mt-10">
+                    <div class="btns-group">
+                        <button [disabled]="u_action_btns[2]" mat-raised-button matTooltip="Insert to DB"
+                            (click)="insertJsonToDB()" id="db_btn"
+                            class="bg-blue-500 text-white text-sm px-4 py-2 mb-3 rounded">
+                            Insert to DB
+                        </button>
+                        <button [disabled]="disable_btns[2]" mat-raised-button matTooltip="Next step" (click)="next()"
+                            id="nxt_btn_i" class="bg-blue-500 text-white text-sm px-4 py-2 mb-3 rounded">
+                            Next
+                        </button>
+                    </div>
+                    <mat-spinner style="margin:0 auto;" [diameter]="30" *ngIf="show_u_spinner"
+                        mode="indeterminate"></mat-spinner>
+                    <mat-progress-bar *ngIf="show_u_spinner" mode="determinate" [value]="_u_value"></mat-progress-bar>
+                    <span style="margin:0 auto;" *ngIf="show_u_spinner">Inserted to DB: {{_u_value}}%</span>
+                </div>
+            </div>
+            <div class="up_completed"></div>
+            <div class="go_home">
+                <button mat-raised-button matTooltip="Go Home" (click)="goHome()" id="btn_go_home"
+                    class="bg-blue-500 text-white text-sm px-4 py-2 mb-3 rounded">
+                    Go Home
+                </button>
+            </div>
+        </div>
     </div>
 </div>

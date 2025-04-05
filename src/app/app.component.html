@@ -21,8 +21,8 @@
   </span>
   <span *ngIf="isAuth">
     <button class='header-list' mat-icon-button [matMenuTriggerFor]="loginMenu">
-      <mat-icon aria-hidden="false" aria-label="user icon" fontIcon="account_circle" [ariaSetSize]="50"
-            color="white" matTooltip={{user.name}}></mat-icon>
+      <mat-icon aria-hidden="false" aria-label="user icon" fontIcon="account_circle" [ariaSetSize]="50" color="white"
+        matTooltip={{user.name}}></mat-icon>
     </button>
     <mat-menu #loginMenu="matMenu">
       <button mat-menu-item>
@@ -40,10 +40,6 @@
     </mat-menu>
   </span>
 </mat-toolbar>
-<div class="p-4" 
-  (mousemove)="onUserAction()"
-  (click)="onUserAction()"
-  (keypress)="onUserAction()"
-  >
+<div class="p-4" (mousemove)="onUserAction()" (click)="onUserAction()" (keypress)="onUserAction()">
   <router-outlet></router-outlet>
 </div>

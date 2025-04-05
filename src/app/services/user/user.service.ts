@@ -44,7 +44,7 @@ export class UserService {
   getUsers(){
     const users = this.http.get<User[]>(this.auth_url);
     //const users = this.apiService.get("users");
-    console.log('users = ', users);
+    //console.log('users = ', users);
     return users;
   }
 
@@ -68,6 +68,10 @@ export class UserService {
     });
 
     return user_profile;
+  }
+
+  userLoggedIn(){
+    return localStorage.getItem('tw_user')? true: false;
   }
 
 }
