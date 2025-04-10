@@ -35,14 +35,14 @@
             <div class="progressbar">
                 <div class="progress" id="progress"></div>
                 <div class="progress-step progress-step-active" data-title="Upload"></div>
-                <div class="progress-step" data-title="Convert"></div>
+                <div class="progress-step" data-title="Format"></div>
                 <div class="progress-step" data-title="Insert"></div>
             </div>
 
             <div class="form-step form-step-active">
                 <div class="grid grid-cols-1 bg-white px-4 py-4 mt-10">
-                    <input [disabled]="showSpinner()" type="file" matTooltip="Select excel file" id="file_in"
-                        (change)="onFileSelected($event)" class="py-4">
+                    <input [disabled]="showSpinner()" type="file" accept=".xlsx" matTooltip="Select excel file"
+                        id="file_in" (change)="onFileSelected($event)" class="py-4">
 
                     <div class="btns-group">
                         <button [disabled]="u_action_btns[0]" mat-raised-button
@@ -64,10 +64,10 @@
             <div class="form-step">
                 <div class="grid grid-cols-1 bg-white px-4 py-4 mt-10">
                     <div class="btns-group">
-                        <button [disabled]="u_action_btns[1]" mat-raised-button matTooltip="Convert to json"
+                        <button [disabled]="u_action_btns[1]" mat-raised-button matTooltip="Format to DB"
                             (click)="convertExcelToJson()" id="json_btn"
                             class="bg-blue-500 text-white text-sm px-4 py-2 mb-3 rounded">
-                            Convert to JSON
+                            Format
                         </button>
                         <button [disabled]="disable_btns[1]" mat-raised-button matTooltip="Next step" (click)="next()"
                             id="nxt_btn_c" class="bg-blue-500 text-white text-sm px-4 py-2 mb-3 rounded">
