@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Product } from '../../models/product';
 import { API_URL } from '../../constants/tw_contants';
+import { timeout } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { API_URL } from '../../constants/tw_contants';
 export class ProductService {
   apiURL= API_URL;
   httpClient:HttpClient;
+  THREE_MINUTES: number = 3 * 60 * 1000;
 
   constructor(httpClient: HttpClient) { 
     this.httpClient = httpClient;
@@ -60,7 +62,7 @@ export class ProductService {
       responseType: 'blob',
       reportProgress: true,
       observe: 'events'
-    });
+    }).pipe(timeout(this.THREE_MINUTES));
   }
 
   //upload excel sheet
@@ -68,7 +70,7 @@ export class ProductService {
     return this.httpClient.post(this.apiURL + 'upload/data_sheet', formData, {
       reportProgress: true,
       observe: 'events'
-    });
+    }).pipe(timeout(this.THREE_MINUTES));
   }
 
   //get request to convert uploaded excel sheet to json file on the server

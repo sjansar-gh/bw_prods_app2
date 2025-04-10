@@ -59,37 +59,53 @@ export class ManageDataComponent implements AfterViewInit {
       new Date().toLocaleDateString().replaceAll('/', '_') + '_' +
       new Date().toLocaleTimeString().replaceAll(':', '_').split(' ')[0];
     this.show_d_spinner = true;
-    this.productService.getExcelSheet().subscribe((event: HttpEvent<Blob>) => {
+    this.productService.getExcelSheet().subscribe((event: HttpEvent<any>) => {
       if (event) {
-        console.log('event: ', event);
+        console.log('event**: ', event);
         if (event.type) {
           switch (event.type) {
             case HttpEventType.DownloadProgress:
-              //download progress
-              const percentDone = Math.round(100 * event.loaded / (event.total || 1));
-              console.log(`File is ${percentDone}% downloaded.`);
-              this._d_value = percentDone;
-              break;
-            case HttpEventType.Response:
-              console.log('File is completely downloaded!');
-              const file_blob = event.body;
-              //save the blob data
-              const dt_tim_str =
-                new Date().toLocaleDateString().replaceAll('/', '_') + '_' +
-                new Date().toLocaleTimeString().replaceAll(':', '_').split(' ')[0];
-              if (file_blob) {
-                saveAs(file_blob, `product_sheet_${dt_tim_str}.xlsx`)
-                console.log('Excel sheet downloaded.');
+              console.log('event***: ', JSON.stringify(event));
+              if (event.loaded == 184 && event.total == 184) {
+                console.log(JSON.stringify(event));
                 this.show_d_spinner = false;
                 this._d_value = 0;
-                this.displaySnackbar('Excel sheet downloaded successfully');
+                this.displaySnackbar('Error! Excel file not found');
+              } else {
+                //download progress
+                const percentDone = Math.round(100 * event.loaded / (event.total || 1));
+                console.log(`File is ${percentDone}% downloaded.`);
+                this._d_value = percentDone;
+              }
+              break;
+            case HttpEventType.Response:
+              const file_blob = event.body;
+              console.log('file_blob: ', file_blob);
+              if (file_blob.size == 184 || file_blob.type === 'application/json') {
+                console.log('File not downloaded');
+              } else {
+                //save the blob data
+                console.log('File downloaded successfully.');
+                const dt_tim_str =
+                  new Date().toLocaleDateString().replaceAll('/', '_') + '_' +
+                  new Date().toLocaleTimeString().replaceAll(':', '_').split(' ')[0];
+                if (file_blob) {
+                  saveAs(file_blob, `product_sheet_${dt_tim_str}.xlsx`)
+                  console.log('Excel sheet downloaded.');
+                  this.show_d_spinner = false;
+                  this._d_value = 0;
+                  this.displaySnackbar('Excel sheet downloaded successfully');
+                }
               }
               break;
           }
         }
       }
       return true;
-    });
+    }), async (error: any) => {
+      const message = JSON.parse(await error.error.text()).message;
+      console.log('error: ', message);
+    };
   }
 
   onFileSelected(event: any) {
